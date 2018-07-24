@@ -1,4 +1,4 @@
-'use strict';
+
 
 const autoprefixer = require('autoprefixer');
 const path = require('path');
@@ -11,6 +11,7 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
+const isProd = process.env.NODE_ENV === 'production';
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -186,6 +187,46 @@ module.exports = {
                   ],
                 },
               },
+            ],
+          },
+          {
+            test: /\.scss$/,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  importLoaders: 1,
+                  sourceMap: !isProd
+                },
+              },
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  // Necessary for external CSS imports to work
+                  // https://github.com/facebookincubator/create-react-app/issues/2677
+                  ident: 'postcss',
+                  sourceMap: !isProd,
+                  plugins: () => [
+                    require('postcss-flexbugs-fixes'),
+                    autoprefixer({
+                      browsers: [
+                        '>1%',
+                        'last 4 versions',
+                        'Firefox ESR',
+                        'not ie < 9', // React doesn't support IE8 anyway
+                      ],
+                      flexbox: 'no-2009',
+                    }),
+                  ],
+                },
+              },
+              {
+                loader: require.resolve('sass-loader'),
+                options: {
+                  sourceMap: !isProd
+                },
+              }
             ],
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
