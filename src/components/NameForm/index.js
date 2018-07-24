@@ -38,6 +38,7 @@ class NameForm extends Component {
         <br/>
         <Select flavor={this.state.flavor} onSelectChange={this.handleSelectChange}/>
         <input type="submit" value="Submit"/>
+        {this.props.children}
       </form>
     );
   }

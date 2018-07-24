@@ -4,9 +4,25 @@ import './App.css';
 import Clock from './components/Clock';
 import Toggle from './components/Toggle';
 import NameForm from './components/NameForm';
+import ThemedButton from './components/Theme/theme-button';
+import {ThemeContext, themes} from './components/Theme/theme-context';
 
 const numbers = [1,2,3,4,5];
 class App extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      theme: themes.light
+    };
+    this.toggleTheme = this.toggleTheme.bind(this);
+  }
+
+  toggleTheme () {
+    this.setState(preState => ({
+      theme: preState.theme === themes.light ? themes.dark : themes.light
+    }));
+  }
+
   render() {
     return (
       <div className="App">
@@ -25,10 +41,12 @@ class App extends Component {
         <Toggle/>
         <h2>列表循环</h2>
         <NumberList numbers={numbers}/>
-        <h2>受控组件</h2>
-        <NameForm/>
-        <h2>状态提升</h2>
-        
+        <h2>受控组件\状态提升</h2>
+        <NameForm>hello</NameForm>
+        <h2>上下文context</h2>
+        <ThemeContext.Provider value={this.state.theme}>
+          <Toolbar changeTheme={this.toggleTheme} />
+        </ThemeContext.Provider>
       </div>
     );
   }
@@ -47,6 +65,14 @@ function NumberList(props) {
   );
   return (
     <ul>{listItems}</ul>
+  );
+}
+
+function Toolbar(props) {
+  return (
+    <ThemedButton onClick={props.changeTheme}>
+      Change Theme
+    </ThemedButton>
   );
 }
 
