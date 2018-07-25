@@ -5,7 +5,7 @@ import Clock from './components/Clock';
 import Toggle from './components/Toggle';
 import NameForm from './components/NameForm';
 import ThemedButton from './components/Theme/theme-button';
-import {ThemeContext, themes} from './components/Theme/theme-context';
+import { ThemeContext, themes } from './components/Theme/theme-context';
 import FancyButton from './components/FancyButton';
 import logProps from './components/logProps';
 
@@ -31,7 +31,7 @@ class App extends Component {
     ref.current.focus();
   }
 
-  render() {
+  render () {
     return (
       <div className="App">
         <header className="App-header">
@@ -62,14 +62,14 @@ class App extends Component {
   }
 }
 
-function Welcome(props) {
+function Welcome (props) {
   return (
     <h1>hello,{props.name}</h1>
   );
 }
 
-function NumberList(props) {
-  const numbers = props.numbers;
+function NumberList (props) {
+  const { numbers } = props;
   const listItems = numbers.map((number) =>
     <li key={number.toString()}>{number}</li>
   );
@@ -78,7 +78,7 @@ function NumberList(props) {
   );
 }
 
-function Toolbar(props) {
+function Toolbar (props) {
   return (
     <ThemedButton onClick={props.changeTheme}>
       Change Theme

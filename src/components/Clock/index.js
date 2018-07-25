@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 class Clock extends Component {
   constructor (props) {
@@ -24,7 +24,7 @@ class Clock extends Component {
       date: new Date()
     });
   }
-  
+
   render () {
     return (
       <div>

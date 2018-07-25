@@ -9,7 +9,7 @@ class ThemeButton extends Component {
           theme => (
             <button
               {...this.props}
-              style={{backgroundColor: theme.background}}
+              style={{ backgroundColor: theme.background }}
             />
           )
         }

@@ -8,14 +8,14 @@ function logProps (Component) {
     }
 
     render () {
-      const {forwardRef, ...rest} = this.props;
+      const { forwardRef, ...rest } = this.props;
 
       return <Component ref={forwardRef} {...rest}/>;
     }
   }
 
   return React.forwardRef((props, ref) => {
-    return <LogProps forwardRef={ref} {...props}/>
+    return <LogProps forwardRef={ref} {...props}/>;
   });
 }
 
