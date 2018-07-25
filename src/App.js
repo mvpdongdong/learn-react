@@ -6,8 +6,12 @@ import Toggle from './components/Toggle';
 import NameForm from './components/NameForm';
 import ThemedButton from './components/Theme/theme-button';
 import {ThemeContext, themes} from './components/Theme/theme-context';
+import FancyButton from './components/FancyButton';
+import logProps from './components/logProps';
 
 const numbers = [1,2,3,4,5];
+const ref = React.createRef();
+const HocFancyButton = logProps(FancyButton);
 class App extends Component {
   constructor (props) {
     super(props);
@@ -21,6 +25,10 @@ class App extends Component {
     this.setState(preState => ({
       theme: preState.theme === themes.light ? themes.dark : themes.light
     }));
+  }
+
+  componentDidMount () {
+    ref.current.focus();
   }
 
   render() {
@@ -47,6 +55,8 @@ class App extends Component {
         <ThemeContext.Provider value={this.state.theme}>
           <Toolbar changeTheme={this.toggleTheme} />
         </ThemeContext.Provider>
+        <h2>转发refs</h2>
+        <HocFancyButton ref={ref}>Click me!</HocFancyButton>
       </div>
     );
   }
