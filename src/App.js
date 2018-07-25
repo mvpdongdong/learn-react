@@ -55,8 +55,11 @@ class App extends Component {
         <ThemeContext.Provider value={this.state.theme}>
           <Toolbar changeTheme={this.toggleTheme} />
         </ThemeContext.Provider>
-        <h2>转发refs</h2>
+        <h2>ref引用dom或组件</h2>
+        <CustomTextInput/>
+        <h2>转发refs，获得子组件dom引用</h2>
         <HocFancyButton ref={ref}>Click me!</HocFancyButton>
+        <footer className="App-footer">2018</footer>
       </div>
     );
   }
@@ -83,6 +86,29 @@ function Toolbar (props) {
     <ThemedButton onClick={props.changeTheme}>
       Change Theme
     </ThemedButton>
+  );
+}
+
+function CustomTextInput (props) {
+  // textInput必须在这里声明，所以 ref 回调可以引用它
+  let textInput = null;
+
+  function handleClick () {
+    textInput.focus();
+  }
+
+  return (
+    <div>
+      <input
+        type="text"
+        ref={(input) => { textInput = input; }} />
+
+      <input
+        type="button"
+        value="Focus the text input"
+        onClick={handleClick}
+      />
+    </div>
   );
 }
 

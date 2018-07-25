@@ -9,7 +9,6 @@ function logProps (Component) {
 
     render () {
       const { forwardRef, ...rest } = this.props;
-
       return <Component ref={forwardRef} {...rest}/>;
     }
   }
