@@ -4,8 +4,7 @@ import './App.css';
 import Clock from './components/Clock';
 import Toggle from './components/Toggle';
 import NameForm from './components/NameForm';
-import ThemedButton from './components/Theme/theme-button';
-import { ThemeContext, themes } from './components/Theme/theme-context';
+import Context from './components/Theme/Context';
 import FancyButton from './components/FancyButton';
 import logProps from './components/logProps';
 
@@ -13,19 +12,6 @@ const numbers = [1,2,3,4,5];
 const ref = React.createRef();
 const HocFancyButton = logProps(FancyButton);
 class App extends Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      theme: themes.light
-    };
-    this.toggleTheme = this.toggleTheme.bind(this);
-  }
-
-  toggleTheme () {
-    this.setState(preState => ({
-      theme: preState.theme === themes.light ? themes.dark : themes.light
-    }));
-  }
 
   componentDidMount () {
     ref.current.focus();
@@ -52,9 +38,7 @@ class App extends Component {
         <h2>受控组件\状态提升</h2>
         <NameForm>hello</NameForm>
         <h2>上下文context</h2>
-        <ThemeContext.Provider value={this.state.theme}>
-          <Toolbar changeTheme={this.toggleTheme} />
-        </ThemeContext.Provider>
+        <Context/>
         <h2>ref引用dom或组件</h2>
         <CustomTextInput/>
         <h2>转发refs，获得子组件dom引用</h2>
@@ -78,14 +62,6 @@ function NumberList (props) {
   );
   return (
     <ul>{listItems}</ul>
-  );
-}
-
-function Toolbar (props) {
-  return (
-    <ThemedButton onClick={props.changeTheme}>
-      Change Theme
-    </ThemedButton>
   );
 }
 
