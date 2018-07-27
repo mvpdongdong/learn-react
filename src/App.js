@@ -7,6 +7,7 @@ import NameForm from './components/NameForm';
 import Context from './components/Theme/Context';
 import FancyButton from './components/FancyButton';
 import logProps from './components/logProps';
+import message from './components/Message';
 
 const numbers = [1,2,3,4,5];
 const ref = React.createRef();
@@ -15,6 +16,14 @@ class App extends Component {
 
   componentDidMount () {
     ref.current.focus();
+  }
+
+  handleClick = () => {
+    message({
+      message: 'hello',
+      type: 'info',
+      showClose: true
+    });
   }
 
   render () {
@@ -43,6 +52,8 @@ class App extends Component {
         <CustomTextInput/>
         <h2>转发refs，获得子组件dom引用</h2>
         <HocFancyButton ref={ref}>Click me!</HocFancyButton>
+        <h2>message组件</h2>
+        <button onClick={this.handleClick}>点击</button>
         <footer className="App-footer">2018</footer>
       </div>
     );
