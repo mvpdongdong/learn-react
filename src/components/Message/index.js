@@ -4,6 +4,11 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 class Message extends Component {
+  constructor (props) {
+    super(props);
+    this.ref = React.createRef();
+  }
+
   static propTypes = {
     type: PropTypes.string,
     duration: PropTypes.number,
@@ -32,15 +37,28 @@ class Message extends Component {
 
   componentWillUnmount () {
     this.clearCloseTimer();
+    this.ref.current.removeEventListener('transitionend', this.props.destroy);
   }
 
   close = () => {
+    this.transitionEnd();
+    this.ref.current.addEventListener('transitionend', this.props.destroy);
     this.clearCloseTimer();
     this.props.onClose();
-    this.props.destroy();
+  }
+
+  transitionStart = () => {
+    setTimeout(() => {
+      this.ref.current.classList.remove('message-fade-enter');
+    }, 0);
+  }
+
+  transitionEnd = () => {
+    this.ref.current.classList.add('message-fade-leave-to');
   }
 
   startCloseTimer = () => {
+    this.transitionStart();
     if (this.props.duration) {
       this.closeTimer = setTimeout(() => {
         this.close();
@@ -64,10 +82,12 @@ class Message extends Component {
     const { type, style, message, showClose } = this.props;
     const classes = [
       'module-message',
+      'message-fade-enter',
       type ? `module-message-${type}` : ''
     ];
     return (
       <div
+        ref={this.ref}
         className={classes.join(' ')}
         style={style}
         onMouseEnter={this.clearCloseTimer}
@@ -82,6 +102,8 @@ class Message extends Component {
   }
 }
 
+let zIndex = 1000;
+
 function message (props) {
   const div = document.createElement('div');
   document.body.appendChild(div);
@@ -91,7 +113,19 @@ function message (props) {
       div.parentNode.removeChild(div);
     };
   };
-  ReactDOM.render(<Message destroy={destroy(div)} {...props}/>, div);
+  ReactDOM.render(<Message style={{ zIndex: zIndex ++ }} destroy={destroy(div)} {...props}/>, div);
 }
+
+['success', 'warning', 'error', 'info'].forEach(type => {
+  message[type] = function (props) {
+    if (typeof props === 'string') {
+      props = {
+        message: props
+      };
+    }
+    props.type = type;
+    message(props);
+  };
+});
 
 export default message;

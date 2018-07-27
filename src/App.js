@@ -19,11 +19,7 @@ class App extends Component {
   }
 
   handleClick = () => {
-    message({
-      message: 'hello',
-      type: 'info',
-      showClose: true
-    });
+    message.success('hello');
   }
 
   render () {
