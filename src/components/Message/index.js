@@ -34,7 +34,7 @@ class Message extends Component {
     this.clearCloseTimer();
   }
 
-  close () {
+  close = () => {
     this.clearCloseTimer();
     this.props.onClose();
     this.props.destroy();
@@ -76,7 +76,7 @@ class Message extends Component {
         <p className="module-message__content">
           {message}
         </p>
-        {showClose && <i className="module-message__closeBtn" onClick={this.close.bind(this)}>x</i>}
+        {showClose && <i className="module-message__closeBtn" onClick={this.close}>x</i>}
       </div>
     );
   }
