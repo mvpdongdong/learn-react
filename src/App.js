@@ -8,6 +8,7 @@ import Context from './components/Theme/Context';
 import FancyButton from './components/FancyButton';
 import logProps from './components/logProps';
 import message from './components/Message';
+import Card from './components/Card';
 
 const numbers = [1,2,3,4,5];
 const ref = React.createRef();
@@ -23,6 +24,8 @@ class App extends Component {
   }
 
   render () {
+    const good = React.createElement('span', null, 'good');
+    console.log(good);
     return (
       <div className="App">
         <header className="App-header">
@@ -32,24 +35,43 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <h2>函数式组件</h2>
-        <Welcome name="shendong"></Welcome>
-        <h2>状态组件更新状态</h2>
-        <Clock/>
-        <h2>绑定事件</h2>
-        <Toggle/>
-        <h2>列表循环</h2>
-        <NumberList numbers={numbers}/>
-        <h2>受控组件\状态提升</h2>
-        <NameForm>hello</NameForm>
-        <h2>上下文context</h2>
-        <Context/>
-        <h2>ref引用dom或组件</h2>
-        <CustomTextInput/>
-        <h2>转发refs，获得子组件dom引用</h2>
-        <HocFancyButton ref={ref}>Click me!</HocFancyButton>
-        <h2>message组件</h2>
-        <button onClick={this.handleClick}>点击</button>
+        <Card>
+          <h2>函数式组件</h2>
+          <Welcome name="shendong"></Welcome>
+        </Card>
+        <Card>
+          <h2>状态组件更新状态</h2>
+          <Clock/>
+        </Card>
+        <Card>
+          <h2>绑定事件</h2>
+          <Toggle/>
+        </Card>
+        <Card>
+          <h2>列表循环</h2>
+          <NumberList numbers={numbers}/>
+        </Card>
+        <Card>
+          <h2>受控组件\状态提升</h2>
+          <NameForm>hello</NameForm>
+        </Card>
+        <Card>
+          <h2>上下文context</h2>
+          <Context/>
+        </Card>
+        <Card>
+          <h2>ref引用dom或组件</h2>
+          <CustomTextInput/>
+        </Card>
+        <Card>
+          <h2>转发refs，获得子组件dom引用</h2>
+          <HocFancyButton ref={ref}>Click me!</HocFancyButton>
+        </Card>
+        <Card>
+          <h2>message组件</h2>
+          <button onClick={this.handleClick}>点击</button>
+        </Card>
+
         <footer className="App-footer">2018</footer>
       </div>
     );
