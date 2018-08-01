@@ -9,6 +9,8 @@ import FancyButton from './components/FancyButton';
 import logProps from './components/logProps';
 import message from './components/Message';
 import Card from './components/Card';
+import { createStore } from 'redux';
+import { connect, Provider } from 'react-redux';
 
 const numbers = [1,2,3,4,5];
 const ref = React.createRef();
