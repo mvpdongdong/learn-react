@@ -1,27 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Clock from './components/Clock';
-import Toggle from './components/Toggle';
-import NameForm from './components/NameForm';
-import Context from './components/Theme/Context';
-import FancyButton from './components/FancyButton';
-import logProps from './components/logProps';
-import message from './components/Message';
-import Card from './components/Card';
-import ReduxIndex from './components/Redux/Index';
+import Clock from '~/components/Clock';
+import Toggle from '~/components/Toggle';
+import NameForm from '~/components/NameForm';
+import Context from '~/components/Theme/Context';
+import FancyButton from '~/components/FancyButton';
+import logProps from '~/components/logProps';
+import message from '~/components/Message';
+import Card from '~/components/Card';
+import ReduxIndex from '~/components/Redux/Index';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import themeReducer from './reducers/themeReducer';
+import themeReducer from '~/reducers/themeReducer';
 
 const numbers = [1,2,3,4,5];
 const ref = React.createRef();
 const HocFancyButton = logProps(FancyButton);
 const store = createStore(themeReducer);
-class App extends Component {
+class Example extends Component {
 
   componentDidMount () {
-    ref.current.focus();
+    // ref.current.focus();
   }
 
   handleClick = () => {
@@ -29,17 +27,8 @@ class App extends Component {
   }
 
   render () {
-    const good = React.createElement('span', null, 'good');
-    console.log(good);
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
         <Card>
           <h2>函数式组件</h2>
           <Welcome name="shendong"></Welcome>
@@ -126,4 +115,4 @@ function CustomTextInput (props) {
   );
 }
 
-export default App;
+export default Example;
