@@ -9,8 +9,9 @@ import FancyButton from './components/FancyButton';
 import logProps from './components/logProps';
 import message from './components/Message';
 import Card from './components/Card';
-import { createStore } from 'redux';
-import { connect, Provider } from 'react-redux';
+import { Provider } from 'react-redux';
+import Index from './components/Redux/Index';
+import { store } from './components/Redux/store';
 
 const numbers = [1,2,3,4,5];
 const ref = React.createRef();
@@ -73,7 +74,12 @@ class App extends Component {
           <h2>message组件</h2>
           <button onClick={this.handleClick}>点击</button>
         </Card>
-
+        <Card>
+          <h2>redux</h2>
+          <Provider store={store}>
+            <Index></Index>
+          </Provider>
+        </Card>
         <footer className="App-footer">2018</footer>
       </div>
     );
