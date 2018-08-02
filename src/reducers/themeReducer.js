@@ -1,5 +1,3 @@
-import { createStore } from 'redux';
-
 const themeReducer = (state, action) => {
   if (!state) {
     return {
@@ -14,4 +12,4 @@ const themeReducer = (state, action) => {
   }
 };
 
-export const store = createStore(themeReducer);
+export default themeReducer;

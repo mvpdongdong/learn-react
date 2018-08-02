@@ -9,13 +9,15 @@ import FancyButton from './components/FancyButton';
 import logProps from './components/logProps';
 import message from './components/Message';
 import Card from './components/Card';
-import { Provider } from 'react-redux';
 import Index from './components/Redux/Index';
-import { store } from './components/Redux/store';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import themeReducer from './reducers/themeReducer';
 
 const numbers = [1,2,3,4,5];
 const ref = React.createRef();
 const HocFancyButton = logProps(FancyButton);
+const store = createStore(themeReducer);
 class App extends Component {
 
   componentDidMount () {
@@ -75,7 +77,7 @@ class App extends Component {
           <button onClick={this.handleClick}>点击</button>
         </Card>
         <Card>
-          <h2>redux</h2>
+          <h2>redux基础用例</h2>
           <Provider store={store}>
             <Index></Index>
           </Provider>
