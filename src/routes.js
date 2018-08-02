@@ -7,8 +7,8 @@ const RouterMap = () => (
   <Router>
     <div>
       <ul className="header-nav">
-        <MenuLink to="/" label='Home' activeOnlyWhenExact/>
-        <MenuLink to="/example" label='Example'/>
+        <MenuLink to="/" label='首页' activeOnlyWhenExact/>
+        <MenuLink to="/example" label='例子'/>
       </ul>
       <Switch>
         <Route exact path="/" component={Home} />
