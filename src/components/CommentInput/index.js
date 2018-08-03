@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './index.scss';
 
 class CommentInput extends Component {
+  static propsType = {
+    userName: PropTypes.string,
+    onUserNameBlur: PropTypes.func,
+    onSubmit: PropTypes.func
+  }
+
   constructor (props) {
     super(props);
     this.state = {
@@ -40,7 +47,8 @@ class CommentInput extends Component {
     if (this.props.onSubmit) {
       this.props.onSubmit(
         {
-          ...this.state
+          ...this.state,
+          createTime: + new Date()
         }
       );
     }
