@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './index.scss';
+import { formatTime } from '~/utils';
 
 class Comment extends Component {
   constructor (props) {
@@ -21,10 +22,9 @@ class Comment extends Component {
   }
 
   _updateTimeString () {
-    const duration = (+ new Date() - this.props.comment.createTime) / 1000;
+    const duration = formatTime(this.props.comment.createTime);
     this.setState({
-      timeString: duration > 60 ? `${Math.round(duration / 60)} 分钟前`
-        : `${Math.round(Math.max(duration, 1))} 秒前`
+      timeString: duration
     });
   }
 
