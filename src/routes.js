@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Example from './pages/Example';
 import Comment from './pages/Comment';
+import ComponentPage from './pages/Component';
 
 const RouterMap = () => (
   <Router>
@@ -11,11 +12,13 @@ const RouterMap = () => (
         <MenuLink to="/" label='首页' activeOnlyWhenExact/>
         <MenuLink to="/example" label='例子'/>
         <MenuLink to="/comment" label="评论"/>
+        <MenuLink to="/component" label="组件示例"/>
       </ul>
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/example" component={Example} />
-        <Route path="/comment" component={Comment} />
+        <Route path="/comment" component={Comment}/>
+        <Route path="/component" component={ComponentPage} />
       </Switch>
     </div>
   </Router>

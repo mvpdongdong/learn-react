@@ -5,7 +5,6 @@ import NameForm from '~/components/NameForm';
 import Context from '~/components/Theme/Context';
 import FancyButton from '~/components/FancyButton';
 import logProps from '~/components/logProps';
-import message from '~/components/Message';
 import Card from '~/components/Card';
 import ReduxIndex from '~/components/Redux/Index';
 import { Provider } from 'react-redux';
@@ -20,10 +19,6 @@ class Example extends Component {
 
   componentDidMount () {
     // ref.current.focus();
-  }
-
-  handleClick = () => {
-    message.success('hello');
   }
 
   render () {
@@ -60,10 +55,6 @@ class Example extends Component {
         <Card>
           <h2>转发refs，获得子组件dom引用</h2>
           <HocFancyButton ref={ref}>Click me!</HocFancyButton>
-        </Card>
-        <Card>
-          <h2>message组件</h2>
-          <button onClick={this.handleClick}>点击</button>
         </Card>
         <Card>
           <h2>redux基础用例</h2>
