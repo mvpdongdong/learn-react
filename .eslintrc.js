@@ -14,6 +14,5 @@ module.exports = {
     "space-before-blocks": [2, "always"], // 强制{}之前加空格
     "space-before-function-paren": [2, "always"], // function () function与() 之间加空格
     "space-in-parens": [2, "never"], // 圆括号前后不加空格
-    "prefer-destructuring": [1, { "array": false, "object": true}]  //用对象解构
   }
 }

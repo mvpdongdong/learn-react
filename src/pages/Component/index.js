@@ -15,6 +15,10 @@ class ComponentPage extends Component {
           <h2>message组件</h2>
           <button onClick={this.handleClick}>点击</button>
         </Card>
+        <Card>
+          <h2>单选框组件</h2>
+
+        </Card>
       </div>
     );
   }
