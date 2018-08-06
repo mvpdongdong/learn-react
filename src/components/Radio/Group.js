@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import shallowEqual from 'shallowequal';
-import { Provider } from './context';
+import radioContext from './context';
 
 const getCheckedValue = children => {
   let value;
@@ -66,7 +66,7 @@ class Group extends Component {
       });
     }
 
-    const onChange = this.props.onRadioChange;
+    const onChange = this.props.onChange;
     if (onChange && value !== lastValue) {
       onChange(ev);
     }
@@ -83,11 +83,11 @@ class Group extends Component {
     };
     return (
       <div className="radio-group">
-        <Provider value={context}>
+        <radioContext.Provider value={context}>
           <React.Fragment>
             {this.props.children}
           </React.Fragment>
-        </Provider>
+        </radioContext.Provider>
       </div>
     );
   }

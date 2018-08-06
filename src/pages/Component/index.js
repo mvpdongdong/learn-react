@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
 import Card from '~/components/Card';
 import message from '~/components/Message';
+import Radio from '~/components/Radio/Radio';
+import RadioGroup from '~/components/Radio/Group';
 
 class ComponentPage extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      radio: 2
+    };
+  }
 
   handleClick = () => {
     message.success('hello');
+  }
+
+  handleRadioChange = (ev) => {
+    console.log(ev.target.value);
+    this.setState({
+      radio: ev.target.value
+    });
   }
 
   render () {
@@ -17,7 +32,10 @@ class ComponentPage extends Component {
         </Card>
         <Card>
           <h2>单选框组件</h2>
-
+          <RadioGroup onChange={this.handleRadioChange} value={this.state.radio}>
+            <Radio value={1}>hello</Radio>
+            <Radio value={2}>shen</Radio>
+          </RadioGroup>
         </Card>
       </div>
     );

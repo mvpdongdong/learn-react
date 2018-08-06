@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { ThemeContext } from './theme-context';
 
 class ThemeButton extends Component {
+  componentWillReceiveProps () {
+    console.log('receive props');
+  }
+  componentWillUpdate () {
+    console.log('update');
+  }
   render () {
+    console.log('render');
     return (
       <ThemeContext.Consumer>
         {
@@ -15,6 +22,9 @@ class ThemeButton extends Component {
         }
       </ThemeContext.Consumer>
     );
+  }
+  componentDidUpdate () {
+    console.log('updated');
   }
 }
 
