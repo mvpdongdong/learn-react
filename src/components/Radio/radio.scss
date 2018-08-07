@@ -1,0 +1,76 @@
+.sd-radio-wrapper {
+  line-height: 1.5;
+  font-size: 14px;
+  cursor: pointer;
+}
+.sd-radio {
+  font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.65);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  white-space: nowrap;
+  outline: none;
+  display: inline-block;
+  position: relative;
+  line-height: 1;
+  vertical-align: middle;
+  cursor: pointer;
+  &.sd-radio__checked .sd-radio__inner {
+    border-color: #1890ff;
+    &:after {
+      opacity: 1;
+      transform: scale(0.875);
+      transition: all 0.4s;
+    }
+  }
+  .sd-radio__input {
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    cursor: pointer;
+    opacity: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+  }
+  .sd-radio__inner {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 100px;
+    border-color: #d9d9d9;
+    background-color: #fff;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    &:after {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      left: 3px;
+      top: 3px;
+      border-radius: 8px;
+      display: table;
+      border-top: 0;
+      border-left: 0;
+      opacity: 0;
+      transform: scale(0);
+      content: ' ';
+      background-color: #1890ff;
+    }
+  }
+  & + * {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}

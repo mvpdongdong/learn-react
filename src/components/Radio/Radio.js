@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import radioContext from './context';
 import Group from './Group';
+import './radio.scss';
 
 class RadioContainer extends Component {
   static Group = Group;
@@ -44,17 +46,27 @@ class Radio extends Component {
       radioProps.onChange = radioGroup.onChange;
       radioProps.disabled = radioGroup.disabled || radioProps.disabled;
     }
+    const classString = classNames({
+      'sd-radio__checked': radioProps.checked
+    }, 'sd-radio');
     this.props = radioProps;
     return (
-      <label>
-        <input
-          type="radio"
-          checked={this.props.checked}
-          disabled={this.props.disabled}
-          onChange={this.handleChange}
-          value={this.props.value}
-        />
-        {this.props.children}
+      <label className="sd-radio-wrapper">
+        <span
+          className={classString}>
+          <input
+            className="sd-radio__input"
+            type="radio"
+            checked={this.props.checked}
+            disabled={this.props.disabled}
+            onChange={this.handleChange}
+            value={this.props.value}
+          />
+          <span className="sd-radio__inner">
+
+          </span>
+        </span>
+        <span>{this.props.children}</span>
       </label>
     );
   }
