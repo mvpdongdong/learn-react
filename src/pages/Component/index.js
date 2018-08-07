@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Card from '~/components/Card';
 import message from '~/components/Message';
 import Radio from '~/components/Radio/Radio';
-import RadioGroup from '~/components/Radio/Group';
+
+const RadioGroup = Radio.Group;
 
 class ComponentPage extends Component {
   constructor (props) {
@@ -17,7 +18,6 @@ class ComponentPage extends Component {
   }
 
   handleRadioChange = (ev) => {
-    console.log(ev.target.value);
     this.setState({
       radio: ev.target.value
     });

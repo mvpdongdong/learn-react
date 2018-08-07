@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import radioContext from './context';
+import Group from './Group';
 
 class RadioContainer extends Component {
+  static Group = Group;
   render () {
     return (
       <radioContext.Consumer>
@@ -16,40 +18,42 @@ class RadioContainer extends Component {
 }
 
 class Radio extends Component {
-  constructor (props) {
-    super(props);
-    const radioGroup = this.props.radioGroup;
-    const checked = radioGroup.value === this.props.value;
-    this.state = {
-      checked
-    };
-  }
-
-  componentWillReceiveProps (nextProps) {
-    const radioGroup = nextProps.radioGroup;
-    const checked = radioGroup.value === this.props.value;
-    console.log('1111',this.props.value);
-    console.log('1112',radioGroup.value);
-    console.log('1114', checked);
-    this.setState({
-      checked
+  handleChange = (ev) => {
+    const { props } = this;
+    if (typeof props.onChange !== 'function') return;
+    props.onChange({
+      target: {
+        ...this.props,
+        checked: ev.target.checked,
+      },
+      stopPropagation () {
+        ev.stopPropagation();
+      },
+      preventDefault () {
+        ev.preventDefault();
+      },
+      nativeEvent: ev.nativeEvent,
     });
   }
 
-  handleChange = (ev) => {
-    const { props } = this;
-    if (!('checked' in props)) {
-      this.setState({
-        checked: ev.target.checked,
-      });
-    }
-    this.props.radioGroup.onChange(ev);
-  }
-
   render () {
+    const { radioGroup, ...radioProps } = this.props;
+    if (radioGroup) {
+      radioProps.checked = radioGroup.value === radioProps.value;
+      radioProps.name = radioGroup.name;
+      radioProps.onChange = radioGroup.onChange;
+      radioProps.disabled = radioGroup.disabled || radioProps.disabled;
+    }
+    this.props = radioProps;
     return (
       <label>
-        <input checked={this.state.checked} onChange={this.handleChange} type="radio" value={this.props.value}/>
+        <input
+          type="radio"
+          checked={this.props.checked}
+          disabled={this.props.disabled}
+          onChange={this.handleChange}
+          value={this.props.value}
+        />
         {this.props.children}
       </label>
     );
