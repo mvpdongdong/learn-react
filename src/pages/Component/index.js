@@ -37,6 +37,10 @@ class ComponentPage extends Component {
             <Radio value={2}>shen</Radio>
           </RadioGroup>
         </Card>
+        <Card>
+          <h2>复选框组件</h2>
+
+        </Card>
       </div>
     );
   }

@@ -62,9 +62,7 @@ class Radio extends Component {
             onChange={this.handleChange}
             value={this.props.value}
           />
-          <span className="sd-radio__inner">
-
-          </span>
+          <span className="sd-radio__inner"></span>
         </span>
         <span>{this.props.children}</span>
       </label>
