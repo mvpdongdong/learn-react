@@ -47,7 +47,8 @@ class Radio extends Component {
       radioProps.disabled = radioGroup.disabled || radioProps.disabled;
     }
     const classString = classNames({
-      'sd-radio__checked': radioProps.checked
+      'sd-radio__checked': radioProps.checked,
+      'sd-radio__disabled': radioProps.disabled
     }, 'sd-radio');
     this.props = radioProps;
     return (

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import Group from './Group';
+import shallowEqual from 'shallowequal';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import Group from './Group';
 import checkboxContext from './context';
+import './checkbox.scss';
 
 class CheckboxContainer extends Component {
   static Group = Group;
@@ -25,6 +28,10 @@ class Checkbox extends Component {
     onChange: PropTypes.func
   }
 
+  shouldComponentUpdate (nextProps, nextState) {
+    return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
+  }
+
   handleChange = (ev) => {
     const { onChange } = this.props;
     if (onChange) {
@@ -43,16 +50,26 @@ class Checkbox extends Component {
       checkboxProps.name = checkboxGroup.name;
     }
     this.props = checkboxProps;
+    const classString = classNames('sd-checkbox', {
+      'sd-checkbox-checked': this.props.checked,
+      'sd-checkbox-disabled': this.props.disabled
+    });
     return (
-      <label>
-        <input
-          type="checkbox"
-          checked={this.props.checked}
-          disabled={this.props.disabled}
-          value={this.props.value}
-          onChange={this.handleChange}
-        />
-        {this.props.children}
+      <label className="sd-checkbox-wrapper">
+        <span className={classString}>
+          <input
+            className="sd-checkbox__input"
+            type="checkbox"
+            checked={this.props.checked}
+            disabled={this.props.disabled}
+            value={this.props.value}
+            onChange={this.handleChange}
+          />
+          <span className="sd-checkbox__inner"></span>
+        </span>
+        <span>
+          {this.props.children}
+        </span>
       </label>
     );
   }

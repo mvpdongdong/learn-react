@@ -5,7 +5,8 @@ import checkboxContext from './context';
 
 class CheckboxGroup extends Component {
   static propTypes = {
-    value: PropTypes.any,
+    value: PropTypes.array,
+    defaultValue: PropTypes.array,
     onChange: PropTypes.func,
     disabled: PropTypes.bool
   }
@@ -37,9 +38,9 @@ class CheckboxGroup extends Component {
     } else {
       value.splice(optionIndex, 1);
     }
-    // if (!('value' in this.props)) {
-    //   this.setState({ value });
-    // }
+    if (!('value' in this.props)) {
+      this.setState({ value });
+    }
     const onChange = this.props.onChange;
     if (onChange) {
       onChange(value);
