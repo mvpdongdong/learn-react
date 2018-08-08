@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import Card from '~/components/Card';
 import message from '~/components/Message';
 import Radio from '~/components/Radio/Radio';
+import Checkbox from '~/components/Checkbox/Checkbox';
 
 const RadioGroup = Radio.Group;
-
+const CheckboxGroup = Checkbox.Group;
 class ComponentPage extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      radio: 2
+      radio: 2,
+      checkbox: [2]
     };
   }
 
@@ -20,6 +22,12 @@ class ComponentPage extends Component {
   handleRadioChange = (ev) => {
     this.setState({
       radio: ev.target.value
+    });
+  }
+
+  handleCheckboxChange = (value) => {
+    this.setState({
+      checkbox: value
     });
   }
 
@@ -39,7 +47,10 @@ class ComponentPage extends Component {
         </Card>
         <Card>
           <h2>复选框组件</h2>
-
+          <CheckboxGroup onChange={this.handleCheckboxChange} value={this.state.checkbox}>
+            <Checkbox value={1}>hello</Checkbox>
+            <Checkbox value={2}>shen</Checkbox>
+          </CheckboxGroup>
         </Card>
       </div>
     );
