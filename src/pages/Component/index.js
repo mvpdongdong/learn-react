@@ -42,8 +42,8 @@ class ComponentPage extends Component {
         <Card>
           <h2>单选框组件</h2>
           <RadioGroup onChange={this.handleRadioChange} value={this.state.radio}>
-            <Radio disabled value={1}>hello</Radio>
-            <Radio disabled value={2}>shen</Radio>
+            <Radio value={1}>hello</Radio>
+            <Radio value={2}>shen</Radio>
           </RadioGroup>
         </Card>
         <Card>
