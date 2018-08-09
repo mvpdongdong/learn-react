@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import shallowEqual from 'shallowequal';
 import radioContext from './context';
+import Radio from './Radio';
 
 const getCheckedValue = children => {
   let value;
@@ -15,7 +16,8 @@ const getCheckedValue = children => {
 
 class Group extends Component {
   static propTypes = {
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    options: PropTypes.array
   };
 
   static defaultProps = {
@@ -74,11 +76,19 @@ class Group extends Component {
         name: this.props.name,
       },
     };
+    let children;
+    let { options } = this.props;
+    if (options) {
+      children = options.map(option => {
+        const { label, ...restOption } = option;
+        return <Radio key={restOption.value} {...restOption}>{label ? label : restOption.value}</Radio>;
+      });
+    }
     return (
       <div className="radio-group">
         <radioContext.Provider value={context}>
           <React.Fragment>
-            {this.props.children}
+            {children ? children : this.props.children}
           </React.Fragment>
         </radioContext.Provider>
       </div>

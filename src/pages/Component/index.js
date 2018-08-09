@@ -6,12 +6,17 @@ import Checkbox from '~/components/Checkbox/Checkbox';
 
 const RadioGroup = Radio.Group;
 const CheckboxGroup = Checkbox.Group;
+const optionsWithDisabled = [
+  { value: 'Apple' },
+  { label: 'Pear', value: 'Pear' },
+  { label: 'Orange', value: 'Orange', disabled: false },
+];
 class ComponentPage extends Component {
   constructor (props) {
     super(props);
     this.state = {
       radio: 2,
-      checkbox: [2]
+      checkbox: [1]
     };
   }
 
@@ -45,6 +50,7 @@ class ComponentPage extends Component {
             <Radio value={1}>hello</Radio>
             <Radio value={2}>shen</Radio>
           </RadioGroup>
+          <RadioGroup options={optionsWithDisabled}  defaultValue={'Apple'}/>
         </Card>
         <Card>
           <h2>复选框组件</h2>
@@ -52,6 +58,7 @@ class ComponentPage extends Component {
             <Checkbox value={1}>hello</Checkbox>
             <Checkbox value={2}>shen</Checkbox>
           </CheckboxGroup>
+          <CheckboxGroup  options={optionsWithDisabled} defaultValue={['Apple']}/>
         </Card>
       </div>
     );

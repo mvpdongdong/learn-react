@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import shallowEqual from 'shallowequal';
 import checkboxContext from './context';
+import Checkbox from './Checkbox';
 
 class CheckboxGroup extends Component {
   static propTypes = {
     value: PropTypes.array,
     defaultValue: PropTypes.array,
     onChange: PropTypes.func,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    options: PropTypes.array
   }
 
   constructor (props) {
@@ -56,11 +58,19 @@ class CheckboxGroup extends Component {
         disabled: this.props.disabled
       }
     };
+    let children;
+    const { options } = this.props;
+    if (options) {
+      children = options.map(option => {
+        const { label, ...restOption } = option;
+        return <Checkbox key={restOption.value} {...restOption}>{label ? label : restOption.value}</Checkbox>;
+      });
+    }
     return (
       <div className="checkbox-group">
         <checkboxContext.Provider value={context}>
           <React.Fragment>
-            {this.props.children}
+            {children ? children : this.props.children}
           </React.Fragment>
         </checkboxContext.Provider>
       </div>
