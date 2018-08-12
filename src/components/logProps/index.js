@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-function logProps (Component) {
-  class LogProps extends React.Component {
+function logProps (WrappedComponent) {
+  class LogProps extends Component {
     componentDidUpdate (prevProps) {
       console.log('old props', prevProps);
       console.log('new props', this.props);
@@ -9,13 +9,18 @@ function logProps (Component) {
 
     render () {
       const { forwardRef, ...rest } = this.props;
-      return <Component ref={forwardRef} {...rest}/>;
+      return <WrappedComponent ref={forwardRef} {...rest}/>;
     }
   }
 
-  return React.forwardRef((props, ref) => {
+  function forwardRef (props, ref) {
     return <LogProps forwardRef={ref} {...props}/>;
-  });
+  }
+
+  const name = WrappedComponent.displayName || WrappedComponent.name || 'Component';
+  forwardRef.displayName = `logProps${name}`;
+
+  return React.forwardRef(forwardRef);
 }
 
 export default logProps;
