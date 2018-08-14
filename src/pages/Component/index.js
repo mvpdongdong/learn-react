@@ -3,6 +3,7 @@ import Card from '~/components/Card';
 import message from '~/components/Message';
 import Radio from '~/components/Radio/Radio';
 import Checkbox from '~/components/Checkbox/Checkbox';
+import Uploader from '~/components/Upload/Upload';
 
 const RadioGroup = Radio.Group;
 const CheckboxGroup = Checkbox.Group;
@@ -16,7 +17,9 @@ class ComponentPage extends Component {
     super(props);
     this.state = {
       radio: 2,
-      checkbox: [1]
+      checkbox: [1],
+      uploadProgress: 0,
+      uploadRes: {}
     };
   }
 
@@ -37,7 +40,35 @@ class ComponentPage extends Component {
     });
   }
 
+  handleIframeLoad = () => {
+    console.log('iframe loaded');
+  }
+
   render () {
+
+    const uploadProps = {
+      name: 'file',
+      action: '/ueditor/index?action=uploadimage',
+      onProgress: (e, file) => {
+        this.setState({
+          uploadProgress: e.percent
+        });
+      },
+      onSuccess: (res, file) => {
+        const reg = /<\/script>/;
+        reg.test(res) && ([, res] = res.split('</script>'));
+        res = JSON.parse(res);
+        this.setState({
+          uploadRes: res
+        });
+        message.success('上传成功！');
+      },
+      onError (error, res, file) {
+        message.error(error);
+        console.log(error);
+      }
+    };
+
     return (
       <div>
         <Card>
@@ -59,6 +90,17 @@ class ComponentPage extends Component {
             <Checkbox value={2}>shen</Checkbox>
           </CheckboxGroup>
           <CheckboxGroup  options={optionsWithDisabled} defaultValue={['Apple']}/>
+        </Card>
+        <Card>
+          <h2>上传组件</h2>
+          <Uploader {...uploadProps}>
+            <button>上传</button>
+          </Uploader>
+          <div>
+            上传进度：{this.state.uploadProgress}
+            <br/>
+            图片链接：<a href={this.state.uploadRes.url}>{this.state.uploadRes.original}</a>
+          </div>
         </Card>
       </div>
     );

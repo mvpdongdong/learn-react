@@ -97,5 +97,11 @@
     "eslint-plugin-html": "^4.0.5",
     "node-sass": "^4.9.2",
     "sass-loader": "^7.0.3"
+  },
+  "proxy": {
+    "/ueditor/index": {
+      "target": "http://ask-sv-base.focus-test.cn",
+      "changeOrigin": true
+    }
   }
 }
