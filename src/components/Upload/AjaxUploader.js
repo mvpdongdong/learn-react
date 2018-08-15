@@ -130,6 +130,20 @@ class AjaxUploader extends Component {
     this.fileInput = node;
   }
 
+  abort = (file) => {
+    const { reqs } = this;
+    if (file) {
+      const uid = file.uid;
+      reqs[uid] && reqs[uid].abort();
+      delete reqs[uid];
+    } else {
+      Object.keys(reqs).forEach(uid => {
+        reqs[uid] && reqs[uid].abort();
+        delete reqs[uid];
+      });
+    }
+  }
+
   render () {
     const { component: Tag, name, multiple, accept, style } = this.props;
     return (
@@ -154,6 +168,11 @@ class AjaxUploader extends Component {
 
   componentDidMount () {
     this._isMounted = true;
+  }
+
+  componentWillUnmount () {
+    this._isMounted = false;
+    this.abort();
   }
 }
 

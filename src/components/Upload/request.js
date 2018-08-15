@@ -19,9 +19,9 @@ const request = function (options) {
 
   formData.append(options.filename, options.file);
 
-  for (let key in data) {
+  Object.keys(data).forEach(key => {
     formData.append(key, data[key]);
-  }
+  });
 
   if (options.onProgress && xhr.upload) {
     xhr.upload.onprogress = (e) => {

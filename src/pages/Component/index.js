@@ -12,14 +12,19 @@ const optionsWithDisabled = [
   { label: 'Pear', value: 'Pear' },
   { label: 'Orange', value: 'Orange', disabled: false },
 ];
+
+const previewFile = (file, callback) => {
+  const reader = new FileReader();
+  reader.onloadend = () => callback(reader.result);
+  reader.readAsDataURL(file);
+};
 class ComponentPage extends Component {
   constructor (props) {
     super(props);
     this.state = {
       radio: 2,
       checkbox: [1],
-      uploadProgress: 0,
-      uploadRes: {}
+      thumbUrl: ''
     };
   }
 
@@ -58,8 +63,10 @@ class ComponentPage extends Component {
         const reg = /<\/script>/;
         reg.test(res) && ([, res] = res.split('</script>'));
         res = JSON.parse(res);
-        this.setState({
-          uploadRes: res
+        previewFile(file, (result) => {
+          this.setState({
+            thumbUrl: result
+          });
         });
         message.success('上传成功！');
       },
@@ -97,9 +104,7 @@ class ComponentPage extends Component {
             <button>上传</button>
           </Uploader>
           <div>
-            上传进度：{this.state.uploadProgress}
-            <br/>
-            图片链接：<a href={this.state.uploadRes.url}>{this.state.uploadRes.original}</a>
+            {this.state.thumbUrl ? <img alt="preview" width="200px" height="300px" src={this.state.thumbUrl}/> : null}
           </div>
         </Card>
       </div>
