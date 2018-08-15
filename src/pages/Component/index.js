@@ -54,6 +54,7 @@ class ComponentPage extends Component {
     const uploadProps = {
       name: 'file',
       action: '/ueditor/index?action=uploadimage',
+      accept: 'image/*',
       onProgress: (e, file) => {
         this.setState({
           uploadProgress: e.percent
@@ -68,6 +69,7 @@ class ComponentPage extends Component {
             thumbUrl: result
           });
         });
+        console.log(file);
         message.success('上传成功！');
       },
       onError (error, res, file) {

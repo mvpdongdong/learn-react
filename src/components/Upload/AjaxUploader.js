@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import getUid from './uid';
 import request from './request';
 import PropTypes from 'prop-types';
+import attrAccept from './attr-accept';
 
 class AjaxUploader extends Component {
   static propTypes = {
@@ -45,7 +46,10 @@ class AjaxUploader extends Component {
     if (ev.type === 'dragover') {
       return;
     }
-    this.uploadFiles(ev.dataTransfer.files);
+    const files = Array.from(ev.dataTransfer.files).filter(file => {
+      return attrAccept(file, this.props.accept);
+    });
+    this.uploadFiles(files);
   }
 
   onChange = (ev) => {
