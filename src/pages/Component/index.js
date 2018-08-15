@@ -45,10 +45,6 @@ class ComponentPage extends Component {
     });
   }
 
-  handleIframeLoad = () => {
-    console.log('iframe loaded');
-  }
-
   render () {
 
     const uploadProps = {
