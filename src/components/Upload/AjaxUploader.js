@@ -40,6 +40,14 @@ class AjaxUploader extends Component {
     this.fileInput.click();
   }
 
+  onFileDrop = (ev) => {
+    ev.preventDefault();
+    if (ev.type === 'dragover') {
+      return;
+    }
+    this.uploadFiles(ev.dataTransfer.files);
+  }
+
   onChange = (ev) => {
     const files = ev.target.files;
     this.uploadFiles(files);
@@ -150,6 +158,8 @@ class AjaxUploader extends Component {
       <Tag
         style={style}
         onClick={this.onClick}
+        onDrop={this.onFileDrop}
+        onDragOver={this.onFileDrop}
       >
         <input
           key={this.state.uid}
