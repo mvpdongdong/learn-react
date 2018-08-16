@@ -83,14 +83,18 @@ class Pagination extends Component {
     return Math.ceil(this.props.total / pageSize);
   }
 
+  handleChange = (page) => {
+    this.setState({
+      current: page
+    });
+    if (this.props.onChange) {
+      this.props.onChange(page);
+    }
+  }
+
   handleClick = (page) => {
     if (this.state.current !== page) {
-      this.setState({
-        current: page
-      });
-      if (this.props.onChange) {
-        this.props.onChange(page);
-      }
+      this.handleChange(page);
     }
   }
 
@@ -103,11 +107,15 @@ class Pagination extends Component {
   }
 
   prev = () => {
-
+    if (this.hasPrev()) {
+      this.handleChange(this.state.current - 1);
+    }
   }
 
   next = () => {
-
+    if (this.hasNext()) {
+      this.handleChange(this.state.current + 1);
+    }
   }
 
   jumpPrev = () => {
@@ -122,9 +130,17 @@ class Pagination extends Component {
     });
   }
 
+  hasPrev () {
+    return this.state.current !== 1;
+  }
+
+  hasNext () {
+    return this.state.current !== this.caculatePage();
+  }
+
   render () {
     const { props } = this;
-    const { current, pageSize } = this.state;
+    const { current } = this.state;
     const { prefixCls } = props;
     const allPages = this.caculatePage();
     const pageBufferSize = 2;
@@ -238,12 +254,14 @@ class Pagination extends Component {
         pagerList.push(lastPager);
       }
     }
+    const prevDisabled = !this.hasPrev();
+    const nextDisabled = !this.hasNext();
     return (
       <ul className={prefixCls}>
         <li
           title={props.showTitle ? '上一页' : null}
           onClick={this.prev}
-          className={`${prefixCls}-prev`}
+          className={`${prevDisabled && `${prefixCls}-prev-disabled`} ${prefixCls}-prev`}
         >
           {props.itemRender(prevPage, 'prev', <a className={`${prefixCls}-item-link`}>{'<'}</a>)}
         </li>
@@ -251,7 +269,7 @@ class Pagination extends Component {
         <li
           title={props.showTitle ? '下一页' : null}
           onClick={this.next}
-          className={`${prefixCls}-next`}
+          className={`${nextDisabled && `${prefixCls}-next-disabled`} ${prefixCls}-next`}
         >
           {props.itemRender(nextPage, 'next', <a className={`${prefixCls}-item-link`}>{'>'}</a>)}
         </li>

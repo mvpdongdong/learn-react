@@ -48,6 +48,7 @@ class ComponentPage extends Component {
   }
 
   handlePaginationChange = (page) => {
+    console.log('page:', page);
     this.setState({
       current: page
     });
@@ -115,7 +116,7 @@ class ComponentPage extends Component {
         </Card>
         <Card>
           <h2>分页组件</h2>
-          <Pagination onChange={this.handlePaginationChange} total={100} current={this.state.current}/>
+          <Pagination onChange={this.handlePaginationChange} total={500} current={this.state.current}/>
         </Card>
       </div>
     );
