@@ -4,6 +4,7 @@ import message from '~/components/Message';
 import Radio from '~/components/Radio/Radio';
 import Checkbox from '~/components/Checkbox/Checkbox';
 import Uploader from '~/components/Upload/Upload';
+import Pagination from '~/components/Pagination/Pagination';
 
 const RadioGroup = Radio.Group;
 const CheckboxGroup = Checkbox.Group;
@@ -24,7 +25,8 @@ class ComponentPage extends Component {
     this.state = {
       radio: 2,
       checkbox: [1],
-      thumbUrl: ''
+      thumbUrl: '',
+      current: 1
     };
   }
 
@@ -42,6 +44,12 @@ class ComponentPage extends Component {
     console.log('checkbox', value);
     this.setState({
       checkbox: value
+    });
+  }
+
+  handlePaginationChange = (page) => {
+    this.setState({
+      current: page
     });
   }
 
@@ -104,6 +112,10 @@ class ComponentPage extends Component {
           <div>
             {this.state.thumbUrl ? <img alt="preview" width="200px" height="300px" src={this.state.thumbUrl}/> : null}
           </div>
+        </Card>
+        <Card>
+          <h2>分页组件</h2>
+          <Pagination onChange={this.handlePaginationChange} total={100} current={this.state.current}/>
         </Card>
       </div>
     );
