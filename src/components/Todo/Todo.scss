@@ -1,0 +1,22 @@
+.todo {
+  list-style: none;
+  line-height: 28px;
+  font-size: 18px;
+}
+.addTodo {
+  margin-bottom: 10px;
+  input {
+    line-height: 28px;
+    padding-left: 10px;
+    font-size: 18px;
+  }
+}
+.todo-filter {
+  margin-top: 10px;
+  button {
+    padding: 5px 10px;
+    background: #fff;
+    border-radius: 2px;
+    font-size: 16px;
+  }
+}
