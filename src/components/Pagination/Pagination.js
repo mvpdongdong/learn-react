@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import Pager from './Pager';
 import './Pagination.scss';
 
 function noop () {
-}
-
-function isInteger (value) {
-  return typeof value === 'number' &&
-    isFinite(value) &&
-    Math.floor(value) === value;
 }
 
 function defaultItemRender (page, type, element) {
@@ -98,6 +91,24 @@ class Pagination extends Component {
     }
   }
 
+  handleKeyPress = (e, clickHanlder, page) => {
+    if (e.key === 'Enter' || e.charCode === 13) {
+      clickHanlder(page);
+    }
+  }
+
+  handleKeyPressPrev = (e) => {
+    if (e.key === 'Enter' || e.charCode === 13) {
+      this.prev();
+    }
+  }
+
+  handleKeyPressNext = (e) => {
+    if (e.key === 'Enter' || e.charCode === 13) {
+      this.next();
+    }
+  }
+
   getJumpPrevPage = () => {
     return Math.max(1, this.state.current - 5);
   }
@@ -139,6 +150,10 @@ class Pagination extends Component {
   }
 
   render () {
+    if (this.props.hideOnSinglePage && this.caculatePage() === 1) {
+      return null;
+    }
+
     const { props } = this;
     const { current } = this.state;
     const { prefixCls } = props;
@@ -194,6 +209,7 @@ class Pagination extends Component {
           last
           rootPrefixCls={prefixCls}
           onClick={this.handleChange}
+          onKeyPress={this.handleKeyPress}
           key={allPages}
           page={allPages}
           active={false}
@@ -205,6 +221,7 @@ class Pagination extends Component {
         <Pager
           rootPrefixCls={prefixCls}
           onClick={this.handleChange}
+          onKeyPress={this.handleKeyPress}
           key={1}
           page={1}
           active={false}
@@ -231,6 +248,7 @@ class Pagination extends Component {
             showTitle={props.showTitle}
             itemRender={props.itemRender}
             onClick={this.handleClick}
+            onKeyPress={this.handleKeyPress}
           />
         );
       }
@@ -260,6 +278,8 @@ class Pagination extends Component {
       <ul className={prefixCls}>
         <li
           title={props.showTitle ? '上一页' : null}
+          tabIndex={prevDisabled ? null : 0}
+          onKeyPress={this.handleKeyPressPrev}
           onClick={this.prev}
           className={`${prevDisabled && `${prefixCls}-prev-disabled`} ${prefixCls}-prev`}
         >
@@ -268,6 +288,8 @@ class Pagination extends Component {
         { pagerList }
         <li
           title={props.showTitle ? '下一页' : null}
+          tabIndex={nextDisabled ? null : 0}
+          onKeyPress={this.handleKeyPressNext}
           onClick={this.next}
           className={`${nextDisabled && `${prefixCls}-next-disabled`} ${prefixCls}-next`}
         >

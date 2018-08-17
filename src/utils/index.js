@@ -64,3 +64,9 @@ export function formatTime (time, option) {
     );
   }
 }
+
+export function isInteger (value) {
+  return typeof value === 'number' &&
+    isFinite(value) &&
+    Math.floor(value) === value;
+}
