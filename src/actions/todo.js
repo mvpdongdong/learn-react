@@ -1,10 +1,13 @@
-let nextTodoId = localStorage.getItem('todos') ?
-  JSON.parse(localStorage.getItem('todos')).length :
-  0;
+let nextTodoId = + new Date();
 export const addTodo = text => ({
   type: 'ADD_TODO',
   id: nextTodoId ++,
   text
+});
+
+export const deleteTodo = id => ({
+  type: 'DELETE_TODO',
+  id
 });
 
 export const setVisibilityFilter = filter => ({

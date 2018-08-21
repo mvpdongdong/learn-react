@@ -14,6 +14,12 @@ const todosReducer = (state = initTodos, action) => {
     ];
     localStorage.setItem('todos', JSON.stringify(todos));
     return todos;
+  case 'DELETE_TODO':
+    todos = state.filter(todo => (
+      todo.id !== action.id
+    ));
+    localStorage.setItem('todos', JSON.stringify(todos));
+    return todos;
   case 'TOGGLE_TODO':
     todos = state.map(todo => (
       (todo.id === action.id)
