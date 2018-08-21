@@ -1,4 +1,6 @@
-let nextTodoId = 0;
+let nextTodoId = localStorage.getItem('todos') ?
+  JSON.parse(localStorage.getItem('todos')).length :
+  0;
 export const addTodo = text => ({
   type: 'ADD_TODO',
   id: nextTodoId ++,
@@ -7,6 +9,11 @@ export const addTodo = text => ({
 
 export const setVisibilityFilter = filter => ({
   type: 'SET_VISIBILITY_FILTER',
+  filter
+});
+
+export const initVisibilityFilter = filter => ({
+  type: 'INIT_VISIBILITY_FILTER',
   filter
 });
 

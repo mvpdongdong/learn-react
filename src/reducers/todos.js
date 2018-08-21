@@ -1,7 +1,10 @@
-const todos = (state = [], action) => {
+let initTodos = localStorage.getItem('todos');
+initTodos = initTodos ? JSON.parse(initTodos) : [];
+const todosReducer = (state = initTodos, action) => {
+  let todos;
   switch (action.type) {
   case 'ADD_TODO':
-    return [
+    todos = [
       ...state,
       {
         id: action.id,
@@ -9,15 +12,19 @@ const todos = (state = [], action) => {
         completed: false
       }
     ];
+    localStorage.setItem('todos', JSON.stringify(todos));
+    return todos;
   case 'TOGGLE_TODO':
-    return state.map(todo => (
+    todos = state.map(todo => (
       (todo.id === action.id)
         ? { ...todo, completed: !todo.completed }
         : todo
     ));
+    localStorage.setItem('todos', JSON.stringify(todos));
+    return todos;
   default:
     return state;
   }
 };
 
-export default todos;
+export default todosReducer;
