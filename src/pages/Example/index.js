@@ -7,14 +7,10 @@ import FancyButton from '~/components/FancyButton';
 import logProps from '~/components/logProps';
 import Card from '~/components/Card';
 import ReduxIndex from '~/components/Redux/Index';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import themeReducer from '~/reducers/themeReducer';
 
 const numbers = [1,2,3,4,5];
 const ref = React.createRef();
 const HocFancyButton = logProps(FancyButton);
-const store = createStore(themeReducer);
 class Example extends Component {
 
   componentDidMount () {
@@ -58,9 +54,7 @@ class Example extends Component {
         </Card>
         <Card>
           <h2>redux基础用例</h2>
-          <Provider store={store}>
-            <ReduxIndex></ReduxIndex>
-          </Provider>
+          <ReduxIndex></ReduxIndex>
         </Card>
         <footer className="App-footer">2018</footer>
       </div>

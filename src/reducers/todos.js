@@ -1,6 +1,4 @@
-let initTodos = localStorage.getItem('todos');
-initTodos = initTodos ? JSON.parse(initTodos) : [];
-const todosReducer = (state = initTodos, action) => {
+const todosReducer = (state = initTodos(), action) => {
   let todos;
   switch (action.type) {
   case 'ADD_TODO':
@@ -12,13 +10,13 @@ const todosReducer = (state = initTodos, action) => {
         completed: false
       }
     ];
-    localStorage.setItem('todos', JSON.stringify(todos));
+    storeTodos(todos);
     return todos;
   case 'DELETE_TODO':
     todos = state.filter(todo => (
       todo.id !== action.id
     ));
-    localStorage.setItem('todos', JSON.stringify(todos));
+    storeTodos(todos);
     return todos;
   case 'TOGGLE_TODO':
     todos = state.map(todo => (
@@ -26,11 +24,21 @@ const todosReducer = (state = initTodos, action) => {
         ? { ...todo, completed: !todo.completed }
         : todo
     ));
-    localStorage.setItem('todos', JSON.stringify(todos));
+    storeTodos(todos);
     return todos;
   default:
     return state;
   }
 };
+
+function storeTodos (todos) {
+  localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+function initTodos () {
+  let todos = localStorage.getItem('todos');
+  todos = todos ? JSON.parse(todos) : [];
+  return todos;
+}
 
 export default todosReducer;
