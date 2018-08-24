@@ -26,9 +26,14 @@ const mapStateToProps = state => ({
   todos: getVisibleTodos(state)
 });
 
-const mapDispatchToProps = dispatch => ({
-  toggleTodo: id => dispatch(toggleTodo(id)),
-  deleteTodo: id => dispatch(deleteTodo(id))
-});
+// const mapDispatchToProps = dispatch => ({
+//   toggleTodo: id => dispatch(toggleTodo(id)),
+//   deleteTodo: id => dispatch(deleteTodo(id))
+// });
+
+const mapDispatchToProps = {
+  toggleTodo,
+  deleteTodo
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
