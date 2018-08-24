@@ -12,14 +12,14 @@
     font-size: 18px;
   }
 }
-.todo-filter {
+.todo-filter, .undo-redo {
   margin-top: 10px;
-  button {
-    padding: 5px 10px;
-    background: #fff;
-    border-radius: 2px;
-    font-size: 16px;
-  }
+}
+button {
+  padding: 5px 10px;
+  background: #fff;
+  border-radius: 2px;
+  font-size: 16px;
 }
 .delete-todo {
   margin-left: 20px;
