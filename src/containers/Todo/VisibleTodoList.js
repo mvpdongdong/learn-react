@@ -1,22 +1,29 @@
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import { toggleTodo, deleteTodo } from '~/actions/todo';
 import TodoList from '~/components/Todo/TodoList';
 
-const getVisibleTodos = (todos, filter) => {
-  switch (filter) {
-  case 'SHOW_ALL':
-    return todos;
-  case 'SHOW_COMPLETED':
-    return todos.filter(todo => (todo.completed));
-  case 'SHOW_ACTIVE':
-    return todos.filter(todo => (!todo.completed));
-  default:
-    return todos;
+const getVisibilityFilter = state => state.visibilityFilter;
+const getTodos = state => state.todos;
+
+const getVisibleTodos = createSelector(
+  [getTodos, getVisibilityFilter],
+  (todos, filter) => {
+    switch (filter) {
+    case 'SHOW_ALL':
+      return todos;
+    case 'SHOW_COMPLETED':
+      return todos.filter(todo => (todo.completed));
+    case 'SHOW_ACTIVE':
+      return todos.filter(todo => (!todo.completed));
+    default:
+      return todos;
+    }
   }
-};
+);
 
 const mapStateToProps = state => ({
-  todos: getVisibleTodos(state.todos, state.visibilityFilter)
+  todos: getVisibleTodos(state)
 });
 
 const mapDispatchToProps = dispatch => ({
