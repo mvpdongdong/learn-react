@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './index.scss';
-import CommentInput from '~/components/CommentInput/container';
-import CommentList from '~/components/CommentList/container';
+import CommentInput from '~/containers/CommentInput';
+import CommentList from '~/containers/CommentList';
 
 class Comment extends Component {
   render () {

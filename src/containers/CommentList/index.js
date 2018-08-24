@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CommentList from './index';
+import CommentList from '~/components/CommentList';
 import { connect } from 'react-redux';
 import { initComments, deleteComment } from '~/actions/comment';
 

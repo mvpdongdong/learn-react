@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CommentInput from './index';
+import CommentInput from '~/components/CommentInput';
 import message from '~/components/Message';
 import { connect } from 'react-redux';
 import { addComment } from '~/actions/comment';
