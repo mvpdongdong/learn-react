@@ -9,19 +9,19 @@ export default function (state, action) {
     state = [];
   }
   switch (action.type) {
-  case INIT_COMMENTS:
+    case INIT_COMMENTS:
     // 初始化评论
-    return action.comments;
-  case ADD_COMMENT:
+      return action.comments;
+    case ADD_COMMENT:
     // 新增评论
-    return [...state, action.comment];
-  case DELETE_COMMENT:
+      return [...state, action.comment];
+    case DELETE_COMMENT:
     // 删除评论
-    return [
-      ...state.slice(0, action.commentIndex),
-      ...state.slice(action.commentIndex + 1)
-    ];
-  default:
-    return state;
+      return [
+        ...state.slice(0, action.commentIndex),
+        ...state.slice(action.commentIndex + 1)
+      ];
+    default:
+      return state;
   }
 }

@@ -3,6 +3,7 @@ import Card from '~/components/Card';
 import Footer from '~/components/Todo/Footer';
 import AddTodo from '~/containers/Todo/AddTodo';
 import VisibleTodoList from '~/containers/Todo/VisibleTodoList';
+import UndoRedo from '~/containers/Todo/UndoRedo';
 
 class ReduxApp extends Component {
   render () {
@@ -11,6 +12,7 @@ class ReduxApp extends Component {
         <AddTodo/>
         <VisibleTodoList/>
         <Footer/>
+        <UndoRedo/>
       </Card>
     );
   }

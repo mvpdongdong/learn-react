@@ -1,33 +1,35 @@
+import undoable, { distinctState } from 'redux-undo';
+
 const todosReducer = (state = initTodos(), action) => {
   let todos;
   switch (action.type) {
-  case 'ADD_TODO':
-    todos = [
-      ...state,
-      {
-        id: action.id,
-        text: action.text,
-        completed: false
-      }
-    ];
-    storeTodos(todos);
-    return todos;
-  case 'DELETE_TODO':
-    todos = state.filter(todo => (
-      todo.id !== action.id
-    ));
-    storeTodos(todos);
-    return todos;
-  case 'TOGGLE_TODO':
-    todos = state.map(todo => (
-      (todo.id === action.id)
-        ? { ...todo, completed: !todo.completed }
-        : todo
-    ));
-    storeTodos(todos);
-    return todos;
-  default:
-    return state;
+    case 'ADD_TODO':
+      todos = [
+        ...state,
+        {
+          id: action.id,
+          text: action.text,
+          completed: false
+        }
+      ];
+      storeTodos(todos);
+      return todos;
+    case 'DELETE_TODO':
+      todos = state.filter(todo => (
+        todo.id !== action.id
+      ));
+      storeTodos(todos);
+      return todos;
+    case 'TOGGLE_TODO':
+      todos = state.map(todo => (
+        (todo.id === action.id)
+          ? { ...todo, completed: !todo.completed }
+          : todo
+      ));
+      storeTodos(todos);
+      return todos;
+    default:
+      return state;
   }
 };
 
@@ -41,4 +43,6 @@ function initTodos () {
   return todos;
 }
 
-export default todosReducer;
+export default undoable(todosReducer, {
+  filter: distinctState()
+});

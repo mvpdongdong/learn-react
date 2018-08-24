@@ -4,20 +4,20 @@ import { toggleTodo, deleteTodo } from '~/actions/todo';
 import TodoList from '~/components/Todo/TodoList';
 
 const getVisibilityFilter = state => state.visibilityFilter;
-const getTodos = state => state.todos;
+const getTodos = state => state.todos.present;
 
 const getVisibleTodos = createSelector(
   [getTodos, getVisibilityFilter],
   (todos, filter) => {
     switch (filter) {
-    case 'SHOW_ALL':
-      return todos;
-    case 'SHOW_COMPLETED':
-      return todos.filter(todo => (todo.completed));
-    case 'SHOW_ACTIVE':
-      return todos.filter(todo => (!todo.completed));
-    default:
-      return todos;
+      case 'SHOW_ALL':
+        return todos;
+      case 'SHOW_COMPLETED':
+        return todos.filter(todo => (todo.completed));
+      case 'SHOW_ACTIVE':
+        return todos.filter(todo => (!todo.completed));
+      default:
+        return todos;
     }
   }
 );

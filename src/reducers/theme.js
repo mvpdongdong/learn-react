@@ -3,10 +3,10 @@ const themeReducer = (state, action) => {
     return 'red';
   }
   switch (action.type) {
-  case 'CHANGE_COLOR':
-    return action.themeColor;
-  default:
-    return state;
+    case 'CHANGE_COLOR':
+      return action.themeColor;
+    default:
+      return state;
   }
 };
 

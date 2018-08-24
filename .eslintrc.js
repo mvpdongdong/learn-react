@@ -2,7 +2,9 @@ module.exports = {
   "extends": "react-app",
   "rules": {
     // enable additional rules
-    "indent": ["error", 2],
+    "indent": ["error", 2, {
+      "SwitchCase": 1
+    }],
     "semi": ["error", "always"],
     "quotes": [2, "single"], // 单引号
     "no-multiple-empty-lines": [2, {"max": 1}], // 禁止多行空行
