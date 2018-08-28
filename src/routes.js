@@ -1,11 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import Home from './pages/Home';
-import Example from './pages/Example';
-import Comment from './pages/Comment/reduxIndex';
-import ComponentPage from './pages/Component';
-import ReduxApp from './pages/ReduxApp';
+import { hot } from 'react-hot-loader';
+import loadable from 'loadable-components';
 import { Provider } from 'react-redux';
+
+const Home = loadable(() => import('~/pages/Home'));
+const Example = loadable(() => import('~/pages/Example'));
+const Comment = loadable(() => import('~/pages/Comment/reduxIndex'));
+const ComponentPage = loadable(() => import('~/pages/Component'));
+const ReduxApp = loadable(() => import('~/pages/ReduxApp'));
 
 const RouterMap = ({ store }) => (
   <Provider store={store}>
@@ -42,4 +45,4 @@ const MenuLink = ({ label, to, activeOnlyWhenExact }) => (
   />
 );
 
-export default RouterMap;
+export default hot(module)(RouterMap);
