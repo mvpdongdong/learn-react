@@ -1,4 +1,4 @@
-import { LOAD_POSTS_REQUEST, LOAD_POSTS_SUCCESS, LOAD_POSTS_FAILURE } from '~/actions/callApi';
+import { LOAD_POSTS_REQUEST, LOAD_POSTS_SUCCESS, LOAD_POSTS_FAILURE } from '~/store/actions/callApi';
 const apiReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_POSTS_REQUEST:

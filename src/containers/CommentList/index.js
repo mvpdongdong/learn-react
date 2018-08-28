@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CommentList from '~/components/CommentList';
 import { connect } from 'react-redux';
-import { initComments, deleteComment } from '~/actions/comment';
+import { initComments, deleteComment } from '~/store/actions/comment';
 
 class CommentListContainer extends Component {
   constructor (props) {
