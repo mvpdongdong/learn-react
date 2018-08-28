@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '~/assets/App.scss';
-import RouterMap from './routes';
+import RouterMap from './router';
 import registerServiceWorker from './registerServiceWorker';
 import store from './store';
 
