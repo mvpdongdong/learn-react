@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
 import '~/assets/App.scss';
 import RouterMap from './routes';
 import registerServiceWorker from './registerServiceWorker';
@@ -15,5 +16,20 @@ const store  = createStore(
   )
 );
 
-ReactDOM.render(<RouterMap store={store} />, document.getElementById('root'));
+const render = Component => {
+  ReactDOM.render(
+    <AppContainer>
+      <Component store={store} />
+    </AppContainer>,
+    document.getElementById('root')
+  );
+};
+
+render(RouterMap);
+
+if (module.hot) {
+  module.hot.accept('./routes', () => {
+    render(RouterMap);
+  });
+}
 registerServiceWorker();

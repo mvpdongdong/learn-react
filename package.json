@@ -101,6 +101,7 @@
   "devDependencies": {
     "eslint-plugin-html": "^4.0.5",
     "node-sass": "^4.9.2",
+    "react-hot-loader": "^4.3.5",
     "sass-loader": "^7.0.3"
   },
   "proxy": {
