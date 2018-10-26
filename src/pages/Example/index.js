@@ -14,7 +14,7 @@ const HocFancyButton = logProps(FancyButton);
 class Example extends Component {
 
   componentDidMount () {
-    // ref.current.focus();
+    ref.current.focus();
   }
 
   render () {

@@ -1,7 +1,4 @@
-const themeReducer = (state, action) => {
-  if (!state) {
-    return 'red';
-  }
+const themeReducer = (state = 'red', action) => {
   switch (action.type) {
     case 'CHANGE_COLOR':
       return action.themeColor;

@@ -4,10 +4,7 @@ const ADD_COMMENT = 'ADD_COMMENT';
 const DELETE_COMMENT = 'DELETE_COMMENT';
 
 // reducer
-export default function (state, action) {
-  if (!state) {
-    state = [];
-  }
+export default function (state = [], action) {
   switch (action.type) {
     case INIT_COMMENTS:
     // 初始化评论
