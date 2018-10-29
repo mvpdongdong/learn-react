@@ -14,7 +14,6 @@ class LoadingProgress extends Component {
 
   componentWillUnmount () {
     NProgress.done();
-    console.log('loading unmount');
   }
 }
 
