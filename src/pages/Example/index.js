@@ -14,7 +14,7 @@ const HocFancyButton = logProps(FancyButton);
 class Example extends Component {
 
   componentDidMount () {
-    ref.current.focus();
+    // ref.current.focus();
   }
 
   render () {
@@ -56,7 +56,7 @@ class Example extends Component {
           <h2>redux基础用例</h2>
           <ReduxIndex></ReduxIndex>
         </Card>
-        <footer className="App-footer">2018</footer>
+        <footer className="App-footer">2019</footer>
       </div>
     );
   }
