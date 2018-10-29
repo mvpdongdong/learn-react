@@ -2,11 +2,11 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from './reducers';
 import callApiMiddleware from './middlewares/callApiMiddleware';
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducers,
-  compose(
-    applyMiddleware(callApiMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeEnhancers(
+    applyMiddleware(callApiMiddleware)
   )
 );
 

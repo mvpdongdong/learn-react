@@ -26,11 +26,12 @@ function createStore (reducer, fn) {
   };
 }
 
-function bindActionCreators (actions, dispatch) {
+function bindActionCreators (actionCreators, dispatch) {
   const obj = {};
-  for (let key in actions) {
-    obj[key] = (...args) => dispatch(actions[key](...args));
-  }
+  const keys = Object.keys(actionCreators);
+  keys.forEach(key => {
+    obj[key] = (...args) => dispatch(actionCreators[key](...args));
+  });
   return obj;
 }
 
@@ -53,8 +54,16 @@ const applyMiddleware = (...middlewares) => (createStore) => (reducer) => {
   return { ...store, dispatch: newDispatch };
 };
 
-function compose (...args) {
-  return args.reduce((a, b) => ((...args) => a(b(...args))));
+function compose (...funcs) {
+  if (funcs.length === 0) {
+    return arg => arg;
+  }
+
+  if (funcs.length === 1) {
+    return funcs[0];
+  }
+
+  return funcs.reduce((a, b) => ((...args) => a(b(...args))));
 }
 
 export  {

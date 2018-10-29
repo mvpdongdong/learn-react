@@ -3,7 +3,7 @@ import React,{ Component } from 'react';
 import { bindActionCreators } from 'redux';
 import propTypes from 'prop-types';
 
-export default function (mapStateToProps,mapDispatchToProps) {
+export default function (mapStateToProps, mapDispatchToProps) {
   return function (WrapedComponent) {
     class ProxyComponent extends Component {
       static contextTypes = {
@@ -15,7 +15,7 @@ export default function (mapStateToProps,mapDispatchToProps) {
         this.state = mapStateToProps(this.store.getState());
       }
       componentWillMount () {
-        this.unsubscribe = this.store.subscribe(()=>{
+        this.unsubscribe = this.store.subscribe(() => {
           this.setState(mapStateToProps(this.store.getState()));
         });
       }
@@ -28,7 +28,7 @@ export default function (mapStateToProps,mapDispatchToProps) {
           actions = mapDispatchToProps(this.store.disaptch);
         } else if (typeof mapDispatchToProps === 'object') {
           console.log('object', mapDispatchToProps);
-          actions = bindActionCreators(mapDispatchToProps,this.store.dispatch);
+          actions = bindActionCreators(mapDispatchToProps, this.store.dispatch);
         }
         return <WrapedComponent {...this.state} {...actions}/>;
       }
