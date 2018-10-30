@@ -8,11 +8,14 @@ class ErrorBoundary extends Component {
     };
   }
 
-  componentDidCatch (error, info) {
-    this.setState({
+  static getDerivedStateFromError () {
+    return {
       hasError: true
-    });
-    console.error(info);
+    };
+  }
+
+  componentDidCatch (error, info) {
+    console.error(error);
   }
 
   render () {

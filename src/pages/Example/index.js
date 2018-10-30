@@ -6,6 +6,7 @@ import Context from '~/components/Theme/Context';
 import FancyButton from '~/components/FancyButton';
 import logProps from '~/components/logProps';
 import Card from '~/components/Card';
+import ErrorBoundary from '~/components/ErrorBoundary';
 import ReduxIndex from '~/components/Redux/Index';
 
 const numbers = [1,2,3,4,5];
@@ -20,42 +21,44 @@ class Example extends Component {
   render () {
     return (
       <div className="App">
-        <Card>
-          <h2>函数式组件</h2>
-          <Welcome name="shendong"></Welcome>
-        </Card>
-        <Card>
-          <h2>状态组件更新状态</h2>
-          <Clock/>
-        </Card>
-        <Card>
-          <h2>绑定事件</h2>
-          <Toggle/>
-        </Card>
-        <Card>
-          <h2>列表循环</h2>
-          <NumberList numbers={numbers}/>
-        </Card>
-        <Card>
-          <h2>受控组件\状态提升</h2>
-          <NameForm>hello</NameForm>
-        </Card>
-        <Card>
-          <h2>上下文context</h2>
-          <Context/>
-        </Card>
-        <Card>
-          <h2>ref引用dom或组件</h2>
-          <CustomTextInput/>
-        </Card>
-        <Card>
-          <h2>转发refs，获得子组件dom引用</h2>
-          <HocFancyButton ref={ref}>Click me!</HocFancyButton>
-        </Card>
-        <Card>
-          <h2>redux基础用例</h2>
-          <ReduxIndex></ReduxIndex>
-        </Card>
+        <ErrorBoundary>
+          <Card>
+            <h2>函数式组件</h2>
+            <Welcome name="shendong"></Welcome>
+          </Card>
+          <Card>
+            <h2>状态组件更新状态</h2>
+            <Clock/>
+          </Card>
+          <Card>
+            <h2>绑定事件</h2>
+            <Toggle/>
+          </Card>
+          <Card>
+            <h2>列表循环</h2>
+            <NumberList numbers={numbers}/>
+          </Card>
+          <Card>
+            <h2>受控组件\状态提升</h2>
+            <NameForm>hello</NameForm>
+          </Card>
+          <Card>
+            <h2>上下文context</h2>
+            <Context/>
+          </Card>
+          <Card>
+            <h2>ref引用dom或组件</h2>
+            <CustomTextInput/>
+          </Card>
+          <Card>
+            <h2>转发refs，获得子组件dom引用</h2>
+            <HocFancyButton ref={ref}>Click me!</HocFancyButton>
+          </Card>
+          <Card>
+            <h2>redux基础用例</h2>
+            <ReduxIndex></ReduxIndex>
+          </Card>
+        </ErrorBoundary>
         <footer className="App-footer">2019</footer>
       </div>
     );
