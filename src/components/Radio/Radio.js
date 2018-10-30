@@ -4,71 +4,70 @@ import radioContext from './context';
 import Group from './Group';
 import './radio.scss';
 
-class RadioContainer extends Component {
+class Radio extends Component {
   static Group = Group;
+
+  radioProps = null
+
+  handleChange = (ev) => {
+    if (!this.radioProps) return;
+    const { onChange } = this.radioProps;
+    if (typeof onChange === 'function') {
+      onChange({
+        target: {
+          ...this.radioProps,
+          checked: ev.target.checked,
+        },
+        stopPropagation () {
+          ev.stopPropagation();
+        },
+        preventDefault () {
+          ev.preventDefault();
+        },
+        nativeEvent: ev.nativeEvent,
+      });
+    }
+  }
+
   render () {
     return (
       <radioContext.Consumer>
         {
-          ({ radioGroup }) => (
-            <Radio {...this.props} radioGroup={radioGroup}></Radio>
-          )
+          ({ radioGroup }) => {
+            const { ...radioProps } = this.props;
+            this.radioProps = radioProps;
+            if (radioGroup) {
+              radioProps.checked = radioGroup.value === radioProps.value;
+              radioProps.name = radioGroup.name;
+              radioProps.onChange = radioGroup.onChange;
+              radioProps.disabled = radioGroup.disabled || radioProps.disabled;
+            }
+            const classString = classNames({
+              'sd-radio__checked': radioProps.checked,
+              'sd-radio__disabled': radioProps.disabled
+            }, 'sd-radio');
+            return (
+              <label className="sd-radio-wrapper">
+                <span
+                  className={classString}>
+                  <input
+                    className="sd-radio__input"
+                    type="radio"
+                    checked={radioProps.checked}
+                    disabled={radioProps.disabled}
+                    onChange={this.handleChange}
+                    value={radioProps.value}
+                  />
+                  <span className="sd-radio__inner"></span>
+                </span>
+                <span>{radioProps.children}</span>
+              </label>
+            );
+          }
         }
       </radioContext.Consumer>
     );
   }
 }
 
-class Radio extends Component {
-  handleChange = (ev) => {
-    const { props } = this;
-    if (typeof props.onChange !== 'function') return;
-    props.onChange({
-      target: {
-        ...this.props,
-        checked: ev.target.checked,
-      },
-      stopPropagation () {
-        ev.stopPropagation();
-      },
-      preventDefault () {
-        ev.preventDefault();
-      },
-      nativeEvent: ev.nativeEvent,
-    });
-  }
-
-  render () {
-    const { radioGroup, ...radioProps } = this.props;
-    if (radioGroup) {
-      radioProps.checked = radioGroup.value === radioProps.value;
-      radioProps.name = radioGroup.name;
-      radioProps.onChange = radioGroup.onChange;
-      radioProps.disabled = radioGroup.disabled || radioProps.disabled;
-    }
-    const classString = classNames({
-      'sd-radio__checked': radioProps.checked,
-      'sd-radio__disabled': radioProps.disabled
-    }, 'sd-radio');
-    this.props = radioProps;
-    return (
-      <label className="sd-radio-wrapper">
-        <span
-          className={classString}>
-          <input
-            className="sd-radio__input"
-            type="radio"
-            checked={this.props.checked}
-            disabled={this.props.disabled}
-            onChange={this.handleChange}
-            value={this.props.value}
-          />
-          <span className="sd-radio__inner"></span>
-        </span>
-        <span>{this.props.children}</span>
-      </label>
-    );
-  }
-}
-
-export default RadioContainer;
+export default Radio;

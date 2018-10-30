@@ -95,6 +95,7 @@ class ComponentPage extends Component {
             <Radio value={1}>hello</Radio>
             <Radio value={2}>shen</Radio>
           </RadioGroup>
+          <p>当前选择值：{this.state.radio}</p>
           <RadioGroup options={optionsWithDisabled}  defaultValue={'Apple'}/>
         </Card>
         <Card>
@@ -103,6 +104,7 @@ class ComponentPage extends Component {
             <Checkbox value={1}>hello</Checkbox>
             <Checkbox value={2}>shen</Checkbox>
           </CheckboxGroup>
+          <p>当前选择值：{this.state.checkbox.toString()}</p>
           <CheckboxGroup  options={optionsWithDisabled} defaultValue={['Apple']}/>
         </Card>
         <Card>
