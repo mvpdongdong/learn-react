@@ -116,6 +116,7 @@ class AjaxUploader extends Component {
         data,
         action,
         headers: props.headers,
+        withCredentials: props.withCredentials,
         onProgress: onProgress ? (e) => {
           onProgress(e, file);
         } : null,

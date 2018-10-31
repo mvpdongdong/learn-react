@@ -67,9 +67,8 @@ class Group extends Component {
         value
       });
     }
-
-    const onChange = this.props.onChange;
-    if (onChange && value !== lastValue) {
+    const { onChange } = this.props;
+    if (onChange && typeof onChange === 'function' && value !== lastValue) {
       onChange(ev);
     }
   }

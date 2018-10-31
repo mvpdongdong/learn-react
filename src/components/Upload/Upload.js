@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AjaxUploader from './AjaxUploader';
+import IframeUploader from './IframeUploader';
 
 function noop () {}
 
@@ -44,8 +45,8 @@ class Upload extends Component {
   }
 
   getComponent () {
-    // return typeof File ? AjaxUploader : IframeUploader;
-    return AjaxUploader;
+    return typeof File ? AjaxUploader : IframeUploader;
+    // return IframeUploader;
   }
 
   abort (file) {

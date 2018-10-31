@@ -6,6 +6,7 @@ import Checkbox from '~/components/Checkbox/Checkbox';
 import Uploader from '~/components/Upload/Upload';
 import Pagination from '~/components/Pagination/Pagination';
 
+document.domain = 'focus-test.cn';
 const RadioGroup = Radio.Group;
 const CheckboxGroup = Checkbox.Group;
 const optionsWithDisabled = [
@@ -69,12 +70,12 @@ class ComponentPage extends Component {
         const reg = /<\/script>/;
         reg.test(res) && ([, res] = res.split('</script>'));
         res = JSON.parse(res);
-        previewFile(file, (result) => {
+        typeof File && previewFile(file, (result) => {
           this.setState({
             thumbUrl: result
           });
         });
-        console.log(file);
+        console.log(res);
         message.success('上传成功！');
       },
       onError (error, res, file) {

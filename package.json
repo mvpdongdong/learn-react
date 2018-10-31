@@ -57,7 +57,7 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "DANGEROUSLY_DISABLE_HOST_CHECK=true node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
   },
@@ -101,6 +101,7 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "eslint-plugin-html": "^4.0.5",
     "node-sass": "^4.9.2",
     "react-hot-loader": "^4.3.5",

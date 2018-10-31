@@ -43,8 +43,8 @@ class CheckboxGroup extends Component {
     if (!('value' in this.props)) {
       this.setState({ value });
     }
-    const onChange = this.props.onChange;
-    if (onChange) {
+    const { onChange } = this.props;
+    if (onChange && typeof onChange === 'function') {
       onChange(value);
     }
   }
