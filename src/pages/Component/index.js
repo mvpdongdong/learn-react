@@ -6,7 +6,6 @@ import Checkbox from '~/components/Checkbox/Checkbox';
 import Uploader from '~/components/Upload/Upload';
 import Pagination from '~/components/Pagination/Pagination';
 
-document.domain = 'focus-test.cn';
 const RadioGroup = Radio.Group;
 const CheckboxGroup = Checkbox.Group;
 const optionsWithDisabled = [
