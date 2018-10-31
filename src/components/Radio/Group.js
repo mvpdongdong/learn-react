@@ -45,6 +45,13 @@ class Group extends Component {
       this.setState({
         value: nextProps.value
       });
+    } else {
+      const checkedValue = getCheckedValue(nextProps.children);
+      if (checkedValue) {
+        this.setState({
+          value: checkedValue,
+        });
+      }
     }
   }
 

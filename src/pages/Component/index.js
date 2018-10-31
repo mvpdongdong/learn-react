@@ -110,6 +110,9 @@ class ComponentPage extends Component {
           </CheckboxGroup>
           <p>当前选择值：{this.state.checkbox.toString()}</p>
           <CheckboxGroup  options={optionsWithDisabled} defaultValue={['Apple']}/>
+          <div>
+            <Checkbox value={1}>hello</Checkbox>
+          </div>
         </Card>
         <Card>
           <h2>上传组件</h2>

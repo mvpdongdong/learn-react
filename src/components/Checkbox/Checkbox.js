@@ -11,12 +11,33 @@ class Checkbox extends Component {
     value: PropTypes.any,
     disabled: PropTypes.bool,
     checked: PropTypes.bool,
+    defaultChecked: PropTypes.bool,
     onChange: PropTypes.func
+  }
+
+  static defaultProps = {
+    defaultChecked: false,
+    onChange: function () {}
   }
 
   static Group = Group;
 
-  checkboxProps = null;
+  constructor (props) {
+    super(props);
+    this.checkboxProps = null;
+    const checked = 'checked' in props ? props.checked : props.defaultChecked;
+    this.state = {
+      checked
+    };
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if ('checked' in nextProps) {
+      this.setState({
+        checked: nextProps.checked
+      });
+    }
+  }
 
   shouldComponentUpdate (nextProps, nextState) {
     return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
@@ -25,6 +46,11 @@ class Checkbox extends Component {
   handleChange = (ev) => {
     if (!this.checkboxProps) return;
     const { onChange } = this.checkboxProps;
+    if (!('checked' in this.props)) {
+      this.setState({
+        checked: ev.target.checked
+      });
+    }
     if (typeof onChange === 'function') {
       onChange({
         ...this.checkboxProps
@@ -38,13 +64,14 @@ class Checkbox extends Component {
         {
           ({ checkboxGroup }) => {
             const { ...checkboxProps } = this.props;
-            this.checkboxProps = checkboxProps;
+            checkboxProps.checked = this.state.checked;
             if (checkboxGroup) {
               checkboxProps.onChange = checkboxGroup.onChange;
               checkboxProps.checked = checkboxGroup.value.indexOf(this.props.value) !== - 1;
               checkboxProps.disabled = checkboxGroup.disabled || checkboxProps.disabled;
               checkboxProps.name = checkboxGroup.name;
             }
+            this.checkboxProps = checkboxProps;
             const classString = classNames('sd-checkbox', {
               'sd-checkbox-checked': checkboxProps.checked,
               'sd-checkbox-disabled': checkboxProps.disabled
