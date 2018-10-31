@@ -1,17 +1,54 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import radioContext from './context';
 import Group from './Group';
 import './radio.scss';
 
 class Radio extends Component {
+  static propTypes = {
+    value: PropTypes.any,
+    disabled: PropTypes.bool,
+    checked: PropTypes.bool,
+    defaultChecked: PropTypes.bool
+  }
+
+  static defaultProps = {
+    className: '',
+    style: {},
+    defaultChecked: false,
+    onFocus () {},
+    onBlur () {},
+    onChange () {},
+  };
+
   static Group = Group;
 
-  radioProps = null
+  constructor (props) {
+    super(props);
+    this.radioProps = null;
+    const checked = 'checked' in props ? props.checked : props.defaultChecked;
+    this.state = {
+      checked
+    };
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if ('checked' in nextProps) {
+      this.setState({
+        checked: nextProps.checked,
+      });
+    }
+  }
 
   handleChange = (ev) => {
     if (!this.radioProps) return;
     const { onChange } = this.radioProps;
+    if (!('checked' in this.props)) {
+      this.setState({
+        checked: ev.target.checked
+      });
+    }
     if (typeof onChange === 'function') {
       onChange({
         target: {
@@ -29,19 +66,32 @@ class Radio extends Component {
     }
   }
 
+  focus () {
+    this.input.focus();
+  }
+
+  blur () {
+    this.input.blur();
+  }
+
+  saveInput = (node) => {
+    this.input = node;
+  }
+
   render () {
     return (
       <radioContext.Consumer>
         {
           ({ radioGroup }) => {
             const { ...radioProps } = this.props;
-            this.radioProps = radioProps;
+            radioProps.checked = this.state.checked;
             if (radioGroup) {
               radioProps.checked = radioGroup.value === radioProps.value;
               radioProps.name = radioGroup.name;
               radioProps.onChange = radioGroup.onChange;
               radioProps.disabled = radioGroup.disabled || radioProps.disabled;
             }
+            this.radioProps = radioProps;
             const classString = classNames({
               'sd-radio__checked': radioProps.checked,
               'sd-radio__disabled': radioProps.disabled
@@ -56,7 +106,10 @@ class Radio extends Component {
                     checked={radioProps.checked}
                     disabled={radioProps.disabled}
                     onChange={this.handleChange}
+                    onFocus={radioProps.onFocus}
+                    onBlur={radioProps.onBlur}
                     value={radioProps.value}
+                    ref={this.saveInput}
                   />
                   <span className="sd-radio__inner"></span>
                 </span>

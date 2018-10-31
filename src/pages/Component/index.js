@@ -97,6 +97,10 @@ class ComponentPage extends Component {
           </RadioGroup>
           <p>当前选择值：{this.state.radio}</p>
           <RadioGroup options={optionsWithDisabled}  defaultValue={'Apple'}/>
+          <div>
+            <Radio disabled value={1}>hello</Radio>
+            <Radio value={2}>shen</Radio>
+          </div>
         </Card>
         <Card>
           <h2>复选框组件</h2>
