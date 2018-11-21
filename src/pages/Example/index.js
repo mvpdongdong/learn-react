@@ -8,6 +8,7 @@ import logProps from '~/components/logProps';
 import Card from '~/components/Card';
 import ErrorBoundary from '~/components/ErrorBoundary';
 import ReduxIndex from '~/components/Redux/Index';
+import SyntheticEvent from '~/components/SyntheticEvent';
 
 const numbers = [1,2,3,4,5];
 const ref = React.createRef();
@@ -33,6 +34,10 @@ class Example extends Component {
           <Card>
             <h2>绑定事件</h2>
             <Toggle/>
+          </Card>
+          <Card>
+            <h2>合成事件, 异步的方式访问事件的属性值</h2>
+            <SyntheticEvent/>
           </Card>
           <Card>
             <h2>列表循环</h2>
