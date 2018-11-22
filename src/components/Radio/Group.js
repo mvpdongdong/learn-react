@@ -93,9 +93,7 @@ class Group extends Component {
     return (
       <div className="radio-group">
         <radioContext.Provider value={context}>
-          <React.Fragment>
-            {children ? children : this.props.children}
-          </React.Fragment>
+          {children ? children : this.props.children}
         </radioContext.Provider>
       </div>
     );

@@ -69,9 +69,7 @@ class CheckboxGroup extends Component {
     return (
       <div className="checkbox-group">
         <checkboxContext.Provider value={context}>
-          <React.Fragment>
-            {children ? children : this.props.children}
-          </React.Fragment>
+          {children ? children : this.props.children}
         </checkboxContext.Provider>
       </div>
     );
