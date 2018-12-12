@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 // import loadable from 'loadable-components';
@@ -15,7 +15,7 @@ const ReduxApp = loadable(() => import('~/pages/ReduxApp'));
 const RouterMap = ({ store }) => (
   <Provider store={store}>
     <Router>
-      <div>
+      <React.Fragment>
         <ul className="header-nav">
           <MenuLink to="/" label='首页' activeOnlyWhenExact/>
           <MenuLink to="/example" label='例子'/>
@@ -30,9 +30,10 @@ const RouterMap = ({ store }) => (
             <Route path="/comment" component={Comment}/>
             <Route path="/component" component={ComponentPage}/>
             <Route path="/reduxApp" component={ReduxApp}/>
+            <Route component={NoMatch}/>
           </Switch>
         </Suspense>
-      </div>
+      </React.Fragment>
     </Router>
   </Provider>
 );
@@ -47,6 +48,14 @@ const MenuLink = ({ label, to, activeOnlyWhenExact }) => (
       </li>
     )}
   />
+);
+
+const NoMatch = ({ location }) => (
+  <div>
+    <h3>
+      No match for <code>{location.pathname}</code>
+    </h3>
+  </div>
 );
 
 export default hot(module)(RouterMap);
