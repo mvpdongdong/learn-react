@@ -230,12 +230,10 @@ class Pagination extends Component {
         />
       );
       let left = Math.max(1, current - pageBufferSize);
-      let right = Math.min(allPages, current + pageBufferSize);
-      if (current - pageBufferSize <= 1) {
-        right= 1 + pageBufferSize * 2;
-      }
-      if (current + pageBufferSize >= allPages) {
-        left = allPages - pageBufferSize * 2;
+      let right = left + 2 * pageBufferSize;
+      if (right > allPages) {
+        right = allPages;
+        left = right - 2 * pageBufferSize;
       }
       for (let i = left; i <= right; i ++) {
         const active = i === current;
@@ -252,23 +250,18 @@ class Pagination extends Component {
           />
         );
       }
-      if (current - 1 >= pageBufferSize * 2 && current !== 1 + 2) {
+      if (left > 1) {
         pagerList[0] = React.cloneElement(pagerList[0], {
           className: `${prefixCls}-item-after-jump-prev`,
         });
         pagerList.unshift(jumpPrev);
+        pagerList.unshift(firstPager);
       }
-      if (allPages - current >= pageBufferSize * 2 && current !== allPages - 2) {
+      if (right < allPages) {
         pagerList[pagerList.length - 1] = React.cloneElement(pagerList[pagerList.length - 1], {
           className: `${prefixCls}-item-before-jump-next`,
         });
         pagerList.push(jumpNext);
-      }
-
-      if (left !== 1) {
-        pagerList.unshift(firstPager);
-      }
-      if (right !== allPages) {
         pagerList.push(lastPager);
       }
     }
